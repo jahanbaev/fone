@@ -1,0 +1,52 @@
+<html>
+<meta content="text/html; charset=utf-8"http-equiv=Content-Type>
+<link href=style/style.css rel=stylesheet>
+<script src=main.js></script>
+<script src=script/drag.js></script>
+<meta content="width=device-width,initial-scale=1"name=viewport>
+<body>
+	
+<div id="nav">
+	<p>Goodfon</p>	
+	<div id="child-nav">
+		<a href="/index.php">Home</a>
+		<a href="/about.html">About us</a>
+		<a href="/tags.html">Search</a>
+		<a href="/saved.html">Saved images</a>
+	</div>
+	<img id="navimg" src="menu.png" onclick="navactive()">
+	</div>
+	<div id="nav-menu">
+		<div class="a"><a href="/saved.html">Saved images</a></div>
+		<div class="a"><a href="/index.php">Home</a></div>
+		<div class="a"><a  href="/about.html">About us</a></div>
+		<div class="a"><a href="/tags.html">Search</a></div>
+	</div>
+	<form action="https://goodfon.net/index.php" method="GET" >
+		<input type="text" autocomplete="off" placeholder=" search images" name="q" id="inp"><button type="submit" >search</button> 
+		</form>
+		<div class="hdr"></div>
+<div id="gal" class="mar saveds">
+</div>
+<div id="del"><p>drop here for delete</p></div>
+<script type="text/javascript">
+	var dts = localStorage.getItem("saved");
+	document.getElementById("gal").innerHTML= dts;
+function o(url) {
+	location.href= "show.php/?url="+url;
+}
+
+new Sortable(document.getElementById('gal'), { group: 'shared',delay: 220,onChoose: function(e) {
+       document.getElementById("del").style.display="flex";
+    },
+    
+    onEnd: function(e) { document.getElementById("del").style.display="none"; document.getElementById("del").innerHTML="";
+localStorage.setItem("saved", document.getElementById("gal").innerHTML)
+}
+ });
+	new Sortable(document.getElementById('del'), {group: 'shared',
+    animation: 150 });
+
+</script>
+</body>
+</html>
